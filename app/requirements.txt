@@ -1,0 +1,5 @@
+requests
+uvicorn
+fastapi
+opentelemetry-distro
+opentelemetry-exporter-otlp
