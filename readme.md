@@ -68,3 +68,22 @@ opentelemetry-bootstrap -a install
 
 ```
 
+
++----------------------+     Traces/Logs     +------------------------+
+|  MCP MySQL Server   |  ─────────────────▶ |  OpenTelemetry Collector|
+|  (FastAPI + OTEL)   |                    +------------------------+
+|  CRUD via Tools     |
++----------▲-----------+                                │
+           │ Logs/Traces                                ▼
+           │                                +--------------------------+
+           │                                |     Custom K3s Controller|
+           │                                |  Watches OTEL logs (via  |
+           │                                |  Prometheus/Loki, etc.)  |
+           │                                |  Deletes MCP pod if rule |
+           │                                |  violated (e.g., delete) |
+           │                                +--------------------------+
+           │
+           ▼
+   MySQL Service (Docker or K8s)
+
+
